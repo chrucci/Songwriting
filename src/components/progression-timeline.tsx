@@ -25,13 +25,29 @@ function SortableSection({ section, isActive }: SortableSectionProps) {
       animation: 150,
       ghostClass: 'chord-slot--dragging',
       dataIdAttr: 'data-id',
-      onEnd: () => {
+      onEnd: (evt) => {
+        // Capture the new order before reverting the DOM
         const order = sortableRef.current?.toArray() ?? []
         const chordMap = new Map(section.chords.map(c => [c.id, c]))
         const reordered = order
           .map(id => chordMap.get(id))
           .filter((c): c is NonNullable<typeof c> => c != null)
 
+        // Revert SortableJS's DOM manipulation so Preact's VDOM stays in sync.
+        // Without this, Preact's diffing algorithm can't reconcile the moved
+        // nodes and the children disappear on re-render.
+        const { from, item, oldIndex } = evt
+        if (from && item && oldIndex != null) {
+          from.removeChild(item)
+          const ref = from.children[oldIndex]
+          if (ref) {
+            from.insertBefore(item, ref)
+          } else {
+            from.appendChild(item)
+          }
+        }
+
+        // Now let Preact re-render with the new order via signal update
         if (reordered.length === section.chords.length) {
           reorderChordsInSection(section.id, reordered)
         }
