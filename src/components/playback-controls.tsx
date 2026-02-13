@@ -47,6 +47,7 @@ export function PlaybackControls() {
 
   return (
     <div class="playback-controls">
+      <h3 class="playback-controls__title">Playback</h3>
       <div class="playback-controls__buttons">
         {status !== 'playing' ? (
           <button class="btn btn--primary" onClick={handlePlay} title="Play">

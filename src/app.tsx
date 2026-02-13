@@ -44,10 +44,10 @@ export function App() {
         <aside class="app-detail">
           <HarmonicToolsPanel />
           <GuitarDiagram />
+          <PlaybackControls />
           <SaveExportPanel />
         </aside>
       </div>
-      <PlaybackControls />
     </div>
   )
 }

@@ -72,4 +72,35 @@ describe('ChordFactory', () => {
       expect(symbols).toEqual(['G', 'Am', 'Bm', 'C', 'D', 'Em', 'F#dim'])
     })
   })
+
+  describe('diatonicSevenths', () => {
+    it('generates 7 diatonic seventh chords for C major', () => {
+      const sevenths = ChordFactory.diatonicSevenths(0, 'major')
+      expect(sevenths).toHaveLength(7)
+
+      const symbols = sevenths.map(c => c.symbol())
+      expect(symbols).toEqual(['Cmaj7', 'Dm7', 'Em7', 'Fmaj7', 'G7', 'Am7', 'Bm7b5'])
+    })
+
+    it('generates 7 diatonic seventh chords for A minor', () => {
+      const sevenths = ChordFactory.diatonicSevenths(9, 'minor')
+      expect(sevenths).toHaveLength(7)
+
+      const symbols = sevenths.map(c => c.symbol())
+      expect(symbols).toEqual(['Am7', 'Bm7b5', 'Cmaj7', 'Dm7', 'Em7', 'Fmaj7', 'G7'])
+    })
+
+    it('generates diatonic seventh chords for G major', () => {
+      const sevenths = ChordFactory.diatonicSevenths(7, 'major')
+      const symbols = sevenths.map(c => c.symbol())
+      expect(symbols).toEqual(['Gmaj7', 'Am7', 'Bm7', 'Cmaj7', 'D7', 'Em7', 'F#m7b5'])
+    })
+
+    it('all seventh chords are sevenths (not triads)', () => {
+      const sevenths = ChordFactory.diatonicSevenths(0, 'major')
+      for (const chord of sevenths) {
+        expect(chord.isSeventh()).toBe(true)
+      }
+    })
+  })
 })

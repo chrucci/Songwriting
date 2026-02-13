@@ -19,6 +19,7 @@ export function ChordSlot({ slot }: ChordSlotProps) {
     <div
       class={`chord-slot ${isSelected ? 'chord-slot--selected' : ''}`}
       style={{ borderBottomColor: color }}
+      data-id={slot.id}
       onClick={() => { selectedChordSlotId.value = slot.id }}
     >
       <span class="chord-slot__symbol">{slot.chord.symbol(flats)}</span>

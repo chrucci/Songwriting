@@ -46,6 +46,20 @@ export const groupedChords = computed(() => {
   return proximityEngine.groupByProximity(rankedChords.value)
 })
 
+/** Diatonic chords (in the current key) annotated with proximity info. */
+export const diatonicChords = computed(() => {
+  const root = selectedKeyRoot.value
+  const mode = selectedMode.value
+  const tonic = tonicChord.value
+  const chords = showSevenths.value
+    ? ChordFactory.diatonicSevenths(root, mode)
+    : ChordFactory.diatonicTriads(root, mode)
+
+  return chords
+    .filter(c => !c.equals(tonic)) // tonic already shown in its own group
+    .map(c => proximityEngine.computeProximity(tonic, c))
+})
+
 // ─── Progression State ───
 
 export interface ChordSlot {

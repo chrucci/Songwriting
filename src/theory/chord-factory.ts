@@ -13,6 +13,16 @@ const MINOR_TRIAD_QUALITIES: ChordQuality[] = [
   'minor', 'diminished', 'major', 'minor', 'minor', 'major', 'major',
 ]
 
+/** Seventh chord quality pattern for major scale degrees (Imaj7 through viim7b5). */
+const MAJOR_SEVENTH_QUALITIES: ChordQuality[] = [
+  'maj7', 'min7', 'min7', 'maj7', 'dom7', 'min7', 'min7b5',
+]
+
+/** Seventh chord quality pattern for natural minor scale degrees (im7 through VIIdom7). */
+const MINOR_SEVENTH_QUALITIES: ChordQuality[] = [
+  'min7', 'min7b5', 'maj7', 'min7', 'min7', 'maj7', 'dom7',
+]
+
 const TRIAD_QUALITIES: ChordQuality[] = ['major', 'minor']
 const SEVENTH_QUALITIES: ChordQuality[] = ['dom7', 'maj7', 'min7', 'dim7', 'min7b5']
 const ALL_QUALITIES: ChordQuality[] = [
@@ -44,6 +54,17 @@ export class ChordFactory {
   static diatonicTriads(root: number, mode: 'major' | 'minor'): Chord[] {
     const intervals = mode === 'major' ? MAJOR_SCALE_INTERVALS : MINOR_SCALE_INTERVALS
     const qualities = mode === 'major' ? MAJOR_TRIAD_QUALITIES : MINOR_TRIAD_QUALITIES
+
+    return intervals.map((interval, i) => {
+      const scaleRoot = new PitchClass(root + interval)
+      return new Chord(scaleRoot, qualities[i])
+    })
+  }
+
+  /** Generate the 7 diatonic seventh chords for a given key and mode. */
+  static diatonicSevenths(root: number, mode: 'major' | 'minor'): Chord[] {
+    const intervals = mode === 'major' ? MAJOR_SCALE_INTERVALS : MINOR_SCALE_INTERVALS
+    const qualities = mode === 'major' ? MAJOR_SEVENTH_QUALITIES : MINOR_SEVENTH_QUALITIES
 
     return intervals.map((interval, i) => {
       const scaleRoot = new PitchClass(root + interval)
