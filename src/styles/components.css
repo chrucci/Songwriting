@@ -1,0 +1,259 @@
+/* ─── Layout ─── */
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--bg-panel);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.app-header h1 {
+  font-size: 1.25rem;
+  color: var(--text-accent);
+  font-weight: 600;
+  margin: 0;
+}
+
+.app-header .subtitle {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.app-header__tonic {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.tonic-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.tonic-chord {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-tonic);
+}
+
+.tonic-notes {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.app-key-selector {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--bg-panel);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.app-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr 280px;
+  flex: 1;
+  overflow: hidden;
+}
+
+@media (max-width: 900px) {
+  .app-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.app-main {
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+.app-detail {
+  padding: 1.5rem;
+  border-left: 1px solid var(--border-color);
+  overflow-y: auto;
+}
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ─── Key Selector ─── */
+
+.key-selector {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.key-buttons {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.key-btn {
+  width: 2.5rem;
+  height: 2rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.key-btn:hover {
+  border-color: var(--color-tonic);
+  color: var(--text-accent);
+}
+
+.key-btn--active {
+  background: var(--color-tonic);
+  color: #fff;
+  border-color: var(--color-tonic);
+}
+
+.key-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.mode-toggle {
+  display: flex;
+  gap: 0;
+}
+
+.mode-btn {
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.mode-btn:first-child {
+  border-radius: 4px 0 0 4px;
+}
+
+.mode-btn:last-child {
+  border-radius: 0 4px 4px 0;
+  border-left: none;
+}
+
+.mode-btn--active {
+  background: var(--color-tonic);
+  color: #fff;
+  border-color: var(--color-tonic);
+}
+
+.seventh-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.seventh-toggle input {
+  cursor: pointer;
+}
+
+/* ─── Chord Browser ─── */
+
+.chord-browser {
+  padding: 1rem;
+  border-right: 1px solid var(--border-color);
+  overflow-y: auto;
+  background: var(--bg-panel);
+}
+
+.chord-browser__title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-accent);
+  margin-bottom: 1rem;
+}
+
+.chord-browser__group {
+  margin-bottom: 1.25rem;
+}
+
+.chord-browser__group-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.chord-browser__group--close .chord-browser__group-title {
+  color: var(--color-close);
+}
+
+.chord-browser__group--medium .chord-browser__group-title {
+  color: var(--color-medium);
+}
+
+.chord-browser__group--far .chord-browser__group-title {
+  color: var(--color-far);
+}
+
+.chord-browser__count {
+  font-size: 0.65rem;
+  background: var(--bg-card);
+  padding: 0.1rem 0.4rem;
+  border-radius: 10px;
+  color: var(--text-muted);
+}
+
+.chord-browser__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  gap: 0.35rem;
+}
+
+/* ─── Chord Card ─── */
+
+.chord-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.4rem 0.25rem;
+  border: 1px solid;
+  border-radius: 6px;
+  background: var(--bg-card);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+
+.chord-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.chord-card__symbol {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-accent);
+}
+
+.chord-card__shared {
+  font-size: 0.55rem;
+  margin-top: 0.15rem;
+}

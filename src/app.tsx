@@ -1,15 +1,43 @@
 import './styles/global.css'
+import './styles/components.css'
+import { KeySelector } from './components/key-selector'
+import { ChordBrowser } from './components/chord-browser'
+import { tonicChord, preferFlats } from './state/signals'
 
 export function App() {
+  const tonic = tonicChord.value
+
   return (
     <div class="app">
       <header class="app-header">
-        <h1>Chord Explorer</h1>
-        <p class="subtitle">Familiar But Different</p>
+        <div class="app-header__left">
+          <h1>Chord Explorer</h1>
+          <p class="subtitle">Familiar But Different</p>
+        </div>
+        <div class="app-header__tonic">
+          <span class="tonic-label">Tonic:</span>
+          <span class="tonic-chord">{tonic.symbol(preferFlats.value)}</span>
+          <span class="tonic-notes">
+            ({tonic.pitchClasses.map(p => p.name(preferFlats.value)).join(' ')})
+          </span>
+        </div>
       </header>
-      <main class="app-main">
-        <p>Select a key to begin exploring chord progressions.</p>
-      </main>
+      <div class="app-key-selector">
+        <KeySelector />
+      </div>
+      <div class="app-layout">
+        <ChordBrowser />
+        <main class="app-main">
+          <div class="placeholder">
+            <p>Click a chord from the palette to add it to your progression.</p>
+          </div>
+        </main>
+        <aside class="app-detail">
+          <div class="placeholder">
+            <p>Select a chord to see details.</p>
+          </div>
+        </aside>
+      </div>
     </div>
   )
 }
