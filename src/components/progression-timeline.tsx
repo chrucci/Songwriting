@@ -16,6 +16,9 @@ interface SortableSectionProps {
 function SortableSection({ section, isActive }: SortableSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const sortableRef = useRef<Sortable | null>(null)
+  // Keep a ref to the latest chords so the onEnd callback never uses a stale closure
+  const chordsRef = useRef(section.chords)
+  chordsRef.current = section.chords
 
   useEffect(() => {
     const el = containerRef.current
@@ -26,29 +29,35 @@ function SortableSection({ section, isActive }: SortableSectionProps) {
       ghostClass: 'chord-slot--dragging',
       dataIdAttr: 'data-id',
       onEnd: (evt) => {
-        // Capture the new order before reverting the DOM
+        const { from, item, oldIndex, newIndex } = evt
+
+        // If nothing actually moved, bail out
+        if (oldIndex === newIndex) return
+
+        // Capture the new order from SortableJS before reverting
         const order = sortableRef.current?.toArray() ?? []
-        const chordMap = new Map(section.chords.map(c => [c.id, c]))
-        const reordered = order
-          .map(id => chordMap.get(id))
-          .filter((c): c is NonNullable<typeof c> => c != null)
 
         // Revert SortableJS's DOM manipulation so Preact's VDOM stays in sync.
-        // Without this, Preact's diffing algorithm can't reconcile the moved
-        // nodes and the children disappear on re-render.
-        const { from, item, oldIndex } = evt
+        // SortableJS physically moves DOM nodes, which desynchronizes Preact's
+        // virtual DOM. We must put the node back before updating state.
         if (from && item && oldIndex != null) {
           from.removeChild(item)
-          const ref = from.children[oldIndex]
-          if (ref) {
-            from.insertBefore(item, ref)
+          if (oldIndex < from.children.length) {
+            from.insertBefore(item, from.children[oldIndex])
           } else {
             from.appendChild(item)
           }
         }
 
-        // Now let Preact re-render with the new order via signal update
-        if (reordered.length === section.chords.length) {
+        // Read from the ref (always current) instead of the stale closure
+        const currentChords = chordsRef.current
+        const chordMap = new Map(currentChords.map(c => [c.id, c]))
+        const reordered = order
+          .map(id => chordMap.get(id))
+          .filter((c): c is NonNullable<typeof c> => c != null)
+
+        // Only apply if we matched all chords (safety check)
+        if (reordered.length === currentChords.length) {
           reorderChordsInSection(section.id, reordered)
         }
       },
