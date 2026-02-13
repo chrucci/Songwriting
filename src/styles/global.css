@@ -1,0 +1,69 @@
+:root {
+  /* Proximity colors */
+  --color-close: #4caf50;
+  --color-medium: #ff9800;
+  --color-far: #f44336;
+
+  /* Function colors */
+  --color-tonic: #2196f3;
+  --color-subdominant: #ff9800;
+  --color-dominant: #f44336;
+
+  /* Theme */
+  --bg-primary: #1a1a2e;
+  --bg-panel: #16213e;
+  --bg-card: #1f2b47;
+  --text-primary: #e0e0e0;
+  --text-accent: #ffffff;
+  --text-muted: #8892a4;
+  --border-color: #2a3a5c;
+
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-header {
+  padding: 1rem 2rem;
+  background-color: var(--bg-panel);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.app-header h1 {
+  font-size: 1.5rem;
+  color: var(--text-accent);
+  font-weight: 600;
+}
+
+.app-header .subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.app-main {
+  flex: 1;
+  padding: 2rem;
+}
