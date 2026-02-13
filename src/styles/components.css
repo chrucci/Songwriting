@@ -257,3 +257,201 @@
   font-size: 0.55rem;
   margin-top: 0.15rem;
 }
+
+/* ─── Progression Timeline ─── */
+
+.progression-timeline {
+  margin-bottom: 1.5rem;
+}
+
+.progression-timeline__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.progression-timeline__title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-accent);
+}
+
+.timeline-section {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin-bottom: 0.75rem;
+  background: var(--bg-panel);
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.timeline-section--active {
+  border-color: var(--color-tonic);
+}
+
+.timeline-section__chords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  min-height: 2.5rem;
+}
+
+.timeline-section__empty {
+  display: flex;
+  align-items: center;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-style: italic;
+  padding: 0.25rem;
+}
+
+/* ─── Chord Slot ─── */
+
+.chord-slot {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem 0.75rem 0.35rem;
+  border: 1px solid var(--border-color);
+  border-bottom: 3px solid;
+  border-radius: 6px;
+  background: var(--bg-card);
+  cursor: pointer;
+  transition: all 0.15s;
+  min-width: 50px;
+}
+
+.chord-slot:hover {
+  border-color: var(--text-muted);
+}
+
+.chord-slot--selected {
+  border-color: var(--color-tonic);
+  box-shadow: 0 0 0 1px var(--color-tonic);
+}
+
+.chord-slot__symbol {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-accent);
+}
+
+.chord-slot__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-top: 0.2rem;
+}
+
+.chord-slot__delete {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 16px;
+  height: 16px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-far);
+  color: #fff;
+  font-size: 0.65rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.chord-slot:hover .chord-slot__delete {
+  opacity: 1;
+}
+
+/* ─── Section Label ─── */
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.section-label__select {
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.section-label__input {
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  font-family: inherit;
+  width: 120px;
+}
+
+.section-label__delete {
+  width: 20px;
+  height: 20px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: color 0.15s;
+}
+
+.section-label__delete:hover {
+  color: var(--color-far);
+}
+
+/* ─── Buttons ─── */
+
+.btn {
+  padding: 0.4rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn:hover {
+  border-color: var(--color-tonic);
+  color: var(--text-accent);
+}
+
+.btn--small {
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+}
+
+.btn--primary {
+  background: var(--color-tonic);
+  border-color: var(--color-tonic);
+  color: #fff;
+}
+
+.btn--primary:hover {
+  opacity: 0.9;
+}

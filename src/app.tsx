@@ -2,6 +2,7 @@ import './styles/global.css'
 import './styles/components.css'
 import { KeySelector } from './components/key-selector'
 import { ChordBrowser } from './components/chord-browser'
+import { ProgressionTimeline } from './components/progression-timeline'
 import { tonicChord, preferFlats } from './state/signals'
 
 export function App() {
@@ -28,13 +29,11 @@ export function App() {
       <div class="app-layout">
         <ChordBrowser />
         <main class="app-main">
-          <div class="placeholder">
-            <p>Click a chord from the palette to add it to your progression.</p>
-          </div>
+          <ProgressionTimeline />
         </main>
         <aside class="app-detail">
           <div class="placeholder">
-            <p>Select a chord to see details.</p>
+            <p>Select a chord to see details, voicings, and harmonic tools.</p>
           </div>
         </aside>
       </div>
