@@ -3,6 +3,12 @@ import './styles/components.css'
 import { KeySelector } from './components/key-selector'
 import { ChordBrowser } from './components/chord-browser'
 import { ProgressionTimeline } from './components/progression-timeline'
+import { RadialVisualization } from './components/radial-visualization'
+import { FunctionLabelDisplay } from './components/function-label-display'
+import { HarmonicToolsPanel } from './components/harmonic-tools-panel'
+import { VoiceLeadingHints } from './components/voice-leading-hints'
+import { PlaybackControls } from './components/playback-controls'
+import { SaveExportPanel } from './components/save-export-panel'
 import { tonicChord, preferFlats } from './state/signals'
 
 export function App() {
@@ -30,13 +36,16 @@ export function App() {
         <ChordBrowser />
         <main class="app-main">
           <ProgressionTimeline />
+          <RadialVisualization />
+          <FunctionLabelDisplay />
+          <VoiceLeadingHints />
         </main>
         <aside class="app-detail">
-          <div class="placeholder">
-            <p>Select a chord to see details, voicings, and harmonic tools.</p>
-          </div>
+          <HarmonicToolsPanel />
+          <SaveExportPanel />
         </aside>
       </div>
+      <PlaybackControls />
     </div>
   )
 }
