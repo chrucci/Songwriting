@@ -7,6 +7,7 @@ import { RadialVisualization } from './components/radial-visualization'
 import { FunctionLabelDisplay } from './components/function-label-display'
 import { HarmonicToolsPanel } from './components/harmonic-tools-panel'
 import { VoiceLeadingHints } from './components/voice-leading-hints'
+import { GuitarDiagram } from './components/guitar-diagram'
 import { PlaybackControls } from './components/playback-controls'
 import { SaveExportPanel } from './components/save-export-panel'
 import { tonicChord, preferFlats } from './state/signals'
@@ -42,6 +43,7 @@ export function App() {
         </main>
         <aside class="app-detail">
           <HarmonicToolsPanel />
+          <GuitarDiagram />
           <SaveExportPanel />
         </aside>
       </div>
