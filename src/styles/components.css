@@ -201,6 +201,10 @@
   gap: 0.5rem;
 }
 
+.chord-browser__group--tonic .chord-browser__group-title {
+  color: var(--color-tonic);
+}
+
 .chord-browser__group--close .chord-browser__group-title {
   color: var(--color-close);
 }

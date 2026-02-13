@@ -3,7 +3,7 @@ import { ChordCard } from './chord-card'
 import { proximityLabel } from '../utils/color'
 import type { ProximityLevel } from '../theory/proximity-engine'
 
-const SECTIONS: ProximityLevel[] = ['close', 'medium', 'far']
+const SECTIONS: ProximityLevel[] = ['tonic', 'close', 'medium', 'far']
 
 export function ChordBrowser() {
   const groups = groupedChords.value

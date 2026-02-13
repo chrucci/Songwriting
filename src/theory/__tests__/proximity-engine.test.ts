@@ -57,10 +57,13 @@ describe('ProximityEngine', () => {
   })
 
   describe('rankAll', () => {
-    it('excludes the tonic chord from results', () => {
+    it('includes the tonic chord with proximity "tonic"', () => {
       const candidates = [cMajorTonic, chord(9, 'minor'), chord(2, 'major')]
       const ranked = engine.rankAll(cMajorTonic, candidates)
-      expect(ranked.find(r => r.chord.equals(cMajorTonic))).toBeUndefined()
+      const tonicResult = ranked.find(r => r.chord.equals(cMajorTonic))
+      expect(tonicResult).toBeDefined()
+      expect(tonicResult!.proximity).toBe('tonic')
+      expect(tonicResult!.sharedNoteCount).toBe(3) // all 3 pitch classes
     })
 
     it('sorts by shared note count descending', () => {
@@ -77,8 +80,9 @@ describe('ProximityEngine', () => {
   })
 
   describe('groupByProximity', () => {
-    it('groups chords into close, medium, and far', () => {
+    it('groups chords into tonic, close, medium, and far', () => {
       const candidates = [
+        cMajorTonic,        // tonic
         chord(9, 'minor'), // close
         chord(4, 'minor'), // close
         chord(5, 'major'), // medium
@@ -89,6 +93,7 @@ describe('ProximityEngine', () => {
       const ranked = engine.rankAll(cMajorTonic, candidates)
       const grouped = engine.groupByProximity(ranked)
 
+      expect(grouped.tonic).toHaveLength(1)
       expect(grouped.close).toHaveLength(2)
       expect(grouped.medium).toHaveLength(2)
       expect(grouped.far).toHaveLength(2)

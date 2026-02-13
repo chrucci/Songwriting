@@ -14,7 +14,7 @@ function rootToAngle(rootValue: number): number {
   return (index / 12) * 360 - 90 // start at top
 }
 
-const RING_RADII = { close: 60, medium: 110, far: 155 }
+const RING_RADII: Record<string, number> = { tonic: 0, close: 60, medium: 110, far: 155 }
 const CENTER = 180
 const SVG_SIZE = 360
 
@@ -31,7 +31,7 @@ export function RadialVisualization() {
       <div class="radial-viz">
         <svg width={SVG_SIZE} height={SVG_SIZE} viewBox={`0 0 ${SVG_SIZE} ${SVG_SIZE}`}>
           {/* Concentric rings */}
-          {Object.entries(RING_RADII).map(([level, r]) => (
+          {Object.entries(RING_RADII).filter(([, r]) => r > 0).map(([level, r]) => (
             <circle
               key={level}
               cx={CENTER} cy={CENTER} r={r}
@@ -74,7 +74,7 @@ export function RadialVisualization() {
     <div class="radial-viz">
       <svg width={SVG_SIZE} height={SVG_SIZE} viewBox={`0 0 ${SVG_SIZE} ${SVG_SIZE}`}>
         {/* Concentric rings */}
-        {Object.entries(RING_RADII).map(([level, r]) => (
+        {Object.entries(RING_RADII).filter(([, r]) => r > 0).map(([level, r]) => (
           <circle
             key={level}
             cx={CENTER} cy={CENTER} r={r}
